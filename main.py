@@ -29,7 +29,8 @@ with open("config.json", "r") as f:
 # Grab vars from config.json
 DEFAULT_PREFIX = config["DEFAULT_PREFIX"]
 OWNER_IDS = config["OWNER_IDS"]
-APP_ID = config["APP_ID"]
+#APP_ID = config["APP_ID"]
+ADMIN_SERVER_IDS = config["ADMIN_SERVER_IDS"]
 
 # Logging
 logging.basicConfig(
@@ -50,13 +51,14 @@ class MyBot(commands.Bot):
             command_prefix=commands.when_mentioned_or(DEFAULT_PREFIX),
             intents=discord.Intents.all(),
             owner_ids=OWNER_IDS,
-            application_id=APP_ID
+            #application_id=APP_ID
         )
         self.synced = False
+        self.ADMIN_SERVER_IDS = ADMIN_SERVER_IDS
     
     async def setup_hook(self):
         if not self.synced:
-            await tree.sync()#guild = discord.Object(id = 628212961218920477))
+            await tree.sync()#guild = discord.Object(id = bot.ADMIN_SERVER_ID[0]))
             print("slash commands synced!")
             self.synced = True
     
