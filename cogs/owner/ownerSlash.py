@@ -59,7 +59,7 @@ class ownerSlash(commands.Cog):
             messageStr = ""
             for cog in marked_cogs:
                 if cog is not None:
-                    await self.bot.unload_extension(f"cogs.{cog}")
+                    await self.bot.load_extension(f"cogs.{cog}")
                     messageStr += f"successfully loaded: cogs.{cog}\n"
                 
             await interaction.response.send_message(messageStr, ephemeral=True)
