@@ -56,9 +56,12 @@ class MyBot(commands.Bot):
         self.synced = False
         self.ADMIN_SERVER_IDS = ADMIN_SERVER_IDS
     
-    async def setup_hook(self):
+    async def sync_tree(self):
         if not self.synced:
-            await tree.sync()#guild = discord.Object(id = bot.ADMIN_SERVER_ID[0]))
+            #for server in self.guilds:
+            #    print(f"Syncing {server.name}")
+            #    await tree.sync(guild = discord.Object(id = server.id))
+            await tree.sync(guild = discord.Object(id = bot.ADMIN_SERVER_ID[0]))
             print("slash commands synced!")
             self.synced = True
     
@@ -67,7 +70,7 @@ class MyBot(commands.Bot):
         await self.wait_until_ready()
         print("Slash commands are now ready!")
         
-
+        await self.sync_tree()
         if not self.ready:
 
             guild_count = 0
