@@ -381,6 +381,7 @@ class events(commands.Cog):
                 else:
                     rand = random.randrange(0, req_len)
                     post = json["data"]["children"][rand]
+                    url = post["data"]["url"] # can be image or post link
                     
                               
                 title = post["data"]["title"]
