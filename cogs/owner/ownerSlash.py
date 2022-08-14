@@ -5,6 +5,7 @@ from discord.ext import commands
 import glob
 import json
 from typing import List
+from time import sleep
 
 class ownerSlash(commands.Cog):
     def __init__(self, bot: commands.bot) -> None:
@@ -50,11 +51,19 @@ class ownerSlash(commands.Cog):
             cog8: str = None,
             cog9: str = None) -> None:
         
+        marked_cogs = [cog, cog2, cog3, cog4, cog5, cog6, cog7, cog8, cog9]
+        
         if interaction.user.id not in self.bot.owner_ids:
             return await interaction.response.send_message("You are not my owner!")
         try:
-            await self.bot.load_extension(f"cogs.{cog}")
-            await interaction.response.send_message(f"Loaded: {cog}", ephemeral=True)
+            messageStr = ""
+            for cog in marked_cogs:
+                if cog is not None:
+                    await self.bot.unload_extension(f"cogs.{cog}")
+                    messageStr += f"successfully loaded: cogs.{cog}\n"
+                
+            await interaction.response.send_message(messageStr, ephemeral=True)
+                
         except Exception as e:
             await interaction.response.send_message(f"Error: {e}", ephemeral=True)
 
@@ -81,10 +90,14 @@ class ownerSlash(commands.Cog):
         if interaction.user.id not in self.bot.owner_ids:
             return await interaction.response.send_message("You are not my owner!")
         try:
+            messageStr = ""
             for cog in marked_cogs:
                 if cog is not None:
                     await self.bot.unload_extension(f"cogs.{cog}")
-                    await interaction.response.send_message(f"Unloaded: {cog}", ephemeral=True)
+                    messageStr += f"successfully unloaded: cogs.{cog}\n"
+                
+                
+            await interaction.response.send_message(messageStr, ephemeral=True)
 
         except Exception as e:
             await interaction.response.send_message(f"Error: {e}", ephemeral=True)
