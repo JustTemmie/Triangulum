@@ -6,18 +6,6 @@ import glob
 import json
 from typing import List
 
-cog_choices = []
-
-for filename in glob.iglob("./cogs/**", recursive=True):
-    if filename.endswith('.py'):
-        # removes the .py
-        cog_path = filename[:-3]
-        # cogs use a dot to separate the path, not slashes
-        cog = cog_path.replace("/", ".")
-        # remove the ./cogs/ part
-        cog = cog[7:]
-        cog_choices.append(cog)
-
 class ownerSlash(commands.Cog):
     def __init__(self, bot: commands.bot) -> None:
         self.bot = bot
@@ -27,6 +15,17 @@ class ownerSlash(commands.Cog):
         interaction: discord.Interaction,
         current: str,
     ) -> List[app_commands.Choice[str]]:
+        cog_choices = []
+
+        for filename in glob.iglob("./cogs/**", recursive=True):
+            if filename.endswith('.py'):
+                # removes the .py
+                cog_path = filename[:-3]
+                # cogs use a dot to separate the path, not slashes
+                cog = cog_path.replace("/", ".")
+                # remove the ./cogs/ part
+                cog = cog[7:]
+                cog_choices.append(cog)
 
         return [
             app_commands.Choice(name=choice, value=choice)
