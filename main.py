@@ -61,7 +61,7 @@ class MyBot(commands.Bot):
             #for server in self.guilds:
             #    print(f"Syncing {server.name}")
             #    await tree.sync(guild = discord.Object(id = server.id))
-            await tree.sync(guild = discord.Object(id = bot.ADMIN_SERVER_IDS[0]))
+            await tree.sync(guild = discord.Object(id = 1008187565695848488))
             print("slash commands synced successfully!")
             self.synced = True
     

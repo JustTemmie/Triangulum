@@ -22,16 +22,16 @@ class mathCommands(commands.Cog):
     async def math_command(
         self,
         interaction: Interaction,
-        equation: str):
+        equation: str) -> None:
         
         for symbol in replacement_table:
-            equation = equation.replace(symbol, replacement_table[symbol])
+            mathEquation = equation.replace(symbol, replacement_table[symbol])
         try:
             with timeout(5, exception=RuntimeError):
-                if set(equation).difference(set(allowedCharacters)):
+                if set(mathEquation).difference(set(allowedCharacters)):
                     return await interaction.response.send_messaged(f"invalid characters used, please only use the following symbols: `{allowedCharacters}`")
                 
-                await interaction.response.send_message(f"{equation} = {eval(equation)}")
+                await interaction.response.send_message(f"{equation} = {eval(mathEquation)}")
         except Exception as e:
             await interaction.response.send_message(f"Error: {e}")
 
