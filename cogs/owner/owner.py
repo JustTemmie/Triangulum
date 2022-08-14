@@ -24,7 +24,7 @@ class owner(commands.Cog):
     def __init__(self, bot: commands.bot) -> None:
         self.bot = bot
 
-    @commands.hybrid_command()
+    @commands.command()
     @commands.guild_only()
     @commands.is_owner()
     async def sync(self, ctx, guilds: Greedy[discord.Object], spec: Optional[Literal["~", "*", "^"]] = None) -> None:

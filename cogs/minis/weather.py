@@ -93,7 +93,7 @@ class weather(Cog):
                 else:
                     embed.add_field(name=x[0].replace("_", " "), value=x[1], inline=False)
 
-        sentMessage = await interaction.response.send_message(embed=embed)
+        await interaction.response.send_message(embed=embed)
         
         if location.lower() in yr_places:
             response = requests.get(
@@ -111,7 +111,7 @@ class weather(Cog):
             view = discord.ui.View()
             view.add_item(av_button)
 
-            await sentMessage.reply(file=discord.File("temp/yr.jpg"), view=view)
+            await self.bot.get_channel(interaction.channel_id).send(file=discord.File("temp/yr.jpg"), view=view)
 
 
 async def setup(bot):
