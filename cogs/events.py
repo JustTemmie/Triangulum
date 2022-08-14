@@ -314,7 +314,7 @@ class events(commands.Cog):
             return
 
         # sends frog in #daily frogs
-        await self.send_reddit(1008131433669341274, "frogs")
+        await self.send_reddit(1008131433669341274, "frogs", True, 25)
 
         with open("images/video/date.json", "w") as f:
             json.dump(f"{datetime.now().day}", f)
@@ -354,14 +354,14 @@ class events(commands.Cog):
     
     @tasks.loop(minutes=30)
     async def random_reddit(self):
-        await self.send_reddit(974642338150367252, "all")
+        await self.send_reddit(974642338150367252, "all", False, 100)
         
     
-    async def send_reddit(self, channel, subreddit):
+    async def send_reddit(self, channel, subreddit, imageRequired=False, limit=25):
         if self.bot.is_ready():
             try:
                 req = requests.get(
-                    f"http://reddit.com/r/{subreddit}/hot.json?limit=50",
+                    f"http://reddit.com/r/{subreddit}/hot.json?limit={limit}",
                     headers={"User-agent": "Chrome"},
                 )
                 json = req.json()
@@ -370,11 +370,18 @@ class events(commands.Cog):
                     return
 
                 req_len = len(json["data"]["children"])
-                for i in range(req_len):
-                    post = json["data"]["children"][i]
-                    url = post["data"]["url"] # can be image or post link
-                    if re.match(r".*\.(jpg|png|gif)$", url):
-                        break
+                
+                if imageRequired:
+                    for i in range(req_len):
+                        post = json["data"]["children"][i]
+                        url = post["data"]["url"] # can be image or post link
+                        if re.match(r".*\.(jpg|png|gif)$", url):
+                            break
+                
+                else:
+                    rand = random.randrange(0, req_len)
+                    post = json["data"]["children"][rand]
+                    
                               
                 title = post["data"]["title"]
                 author = "u/" + post["data"]["author"]
