@@ -1,8 +1,6 @@
 import discord
-from discord import Member, Embed, app_commands
+from discord import app_commands
 from discord.ext import commands
-from discord.ext.commands import cooldown, BucketType
-import json
 
 class ping(commands.Cog):
     def __init__(self, bot):
