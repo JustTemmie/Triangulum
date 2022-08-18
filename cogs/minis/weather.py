@@ -51,9 +51,7 @@ class weather(Cog):
         location: str) -> None:
         
         if location == None:
-            if interaction.guild.id != 918787074801401868 and interaction.guild.id != 885113462378876948:
-                return await interaction.response.send_message("Please specify a location.")
-            location = "tromsø"
+            return await interaction.response.send_message("Please specify a location")
 
 
         r = requests.get(
