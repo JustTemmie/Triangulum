@@ -72,6 +72,7 @@ class MyBot(commands.Bot):
         
         await self.sync_tree()
         if not self.ready:
+            change_status_task.start()
 
             guild_count = 0
             for guild in self.guilds:
@@ -91,6 +92,13 @@ tree = bot.tree
 bot.remove_command("help")
 # Set the ready status to False, so the bot knows it hasnt been initialized yet.
 bot.ready = False
+
+@tasks.loop(seconds = 5)
+async def change_status_task():
+    await bot.change_presence(
+        status=discord.Status.idle,
+        activity=discord.Activity(type=discord.ActivityType.watching, name=f"it's {datetime.utcnow().strftime('%I:%M:%S')} UTC, this is literally just for myself cause i don't have a clock on my left monitor lmao"),
+    )
 
 async def load_cogs(bot):
     print("Loading cogs...")
