@@ -21,7 +21,7 @@ from math import floor
 
 IGNORE_EXCEPTIONS = (CommandNotFound, BadArgument)
 
-fish_IDs = [918830241135353907, 885113515411669002]
+fish_IDs = [1008131433669341274, 885113515411669002]
 
 henwees = [
     "henwee :)",
