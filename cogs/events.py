@@ -236,7 +236,7 @@ class events(commands.Cog):
         if ctx.author.bot:
             return
 
-        if "sus" in ctx.content.lower() and not "jesus" in ctx.content.lower():
+        if ("sus" in ctx.content.lower() and not "jesus" in ctx.content.lower()) or "ussy" in ctx.content.lower():
             msg = await ctx.reply("amogus") 
         
         if "amog" in ctx.content.lower() or "amongu" in ctx.content.lower() or "among us" in ctx.content.lower():
