@@ -97,7 +97,7 @@ bot.ready = False
 async def change_status_task():
     await bot.change_presence(
         status=discord.Status.idle,
-        activity=discord.Activity(type=discord.ActivityType.watching, name=f"it's {datetime.utcnow().strftime('%I:%M:%S')} UTC, this is literally just for myself cause i don't have a clock on my left monitor lmao"),
+        activity=discord.Activity(type=discord.ActivityType.watching, name=f"it's {datetime.utcnow().strftime('%I:%M:%S')} UTC"),
     )
 
 async def load_cogs(bot):
