@@ -270,6 +270,8 @@ class events(commands.Cog):
             "bæv",
             "beav",
             "bever",
+            "castor ",
+            "🦫",
         ]  # if in the message
         
         if ctx.guild.id != 918787074801401868:
