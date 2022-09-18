@@ -16,7 +16,7 @@ import re
 import json
 import os
 
-from time import time
+import time
 from math import floor
 
 IGNORE_EXCEPTIONS = (CommandNotFound, BadArgument)
@@ -228,6 +228,11 @@ class events(commands.Cog):
     
     @commands.Cog.listener()
     async def on_message(self, ctx):
+        if ctx.content == "qscav":
+            if ctx.author.id == 725539745572323409:
+                time.sleep(302)
+                await ctx.author.send("do qscav")
+
         if "--" in ctx.content:
             return
 
