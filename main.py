@@ -54,6 +54,7 @@ class MyBot(commands.Bot):
             #application_id=APP_ID
         )
         self.synced = False
+        self.timestring = ""
         self.ADMIN_SERVER_IDS = ADMIN_SERVER_IDS
     
     async def sync_tree(self):
@@ -93,12 +94,14 @@ bot.remove_command("help")
 # Set the ready status to False, so the bot knows it hasnt been initialized yet.
 bot.ready = False
 
-@tasks.loop(minutes = 1)
+@tasks.loop(seconds = 1)
 async def change_status_task():
-    await bot.change_presence(
-        status=discord.Status.idle,
-        activity=discord.Activity(type=discord.ActivityType.watching, name=f"it's {datetime.utcnow().strftime('%I:%M')} UTC"),
-    )
+    if bot.timestring == f"it's {datetime.utcnow().strftime('%I:%M')} UTC":
+        bot.timestring = f"it's {datetime.utcnow().strftime('%I:%M')} UTC"
+        await bot.change_presence(
+            status=discord.Status.idle,
+            activity=discord.Activity(type=discord.ActivityType.watching, name=bot.timestring),
+        )
 
 async def load_cogs(bot):
     print("Loading cogs...")
