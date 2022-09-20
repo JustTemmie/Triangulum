@@ -96,7 +96,7 @@ bot.ready = False
 
 @tasks.loop(seconds = 1)
 async def change_status_task():
-    if bot.timestring == f"it's {datetime.utcnow().strftime('%I:%M')} UTC":
+    if bot.timestring != f"it's {datetime.utcnow().strftime('%I:%M')} UTC":
         bot.timestring = f"it's {datetime.utcnow().strftime('%I:%M')} UTC"
         await bot.change_presence(
             status=discord.Status.idle,
