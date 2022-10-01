@@ -5,6 +5,9 @@ from discord.ext.commands import Greedy
 from typing import Optional, Literal
 import ast
 
+import sys
+import os
+
 def insert_returns(body):
     # insert return stmt if the last expression is a expression statement
     if isinstance(body[-1], ast.Expr):
@@ -23,6 +26,12 @@ def insert_returns(body):
 class owner(commands.Cog):
     def __init__(self, bot: commands.bot) -> None:
         self.bot = bot
+    
+    @commands.command(name="restart", aliases="reboot")
+    @commands.is_owner()
+    async def rebootbot(self, ctx):
+        os.execv(sys.executable, ["python3"] + sys.argv)
+
 
     @commands.command()
     @commands.guild_only()
