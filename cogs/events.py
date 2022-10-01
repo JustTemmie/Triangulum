@@ -228,10 +228,10 @@ class events(commands.Cog):
     
     @commands.Cog.listener()
     async def on_message(self, ctx):
-        if ctx.content == "qscav":
-            if ctx.author.id == 725539745572323409:
-                time.sleep(302)
-                await ctx.author.send("do qscav")
+        # if ctx.content == "qscav":
+        #     if ctx.author.id == 725539745572323409:
+        #         time.sleep(302)
+        #         await ctx.author.send("do qscav")
 
         if "--" in ctx.content:
             return
@@ -281,6 +281,9 @@ class events(commands.Cog):
         
         if ctx.guild.id != 918787074801401868:
             listies.append("damn")
+            
+        if ctx.guild.id == 918787074801401868 and "😳" in ctx.content:
+            await ctx.add_reaction("<:skushed:983643982884139018>")
         
         for x in range(0, len(listies)):
             if ctx.content.lower() == listies[x]:
