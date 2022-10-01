@@ -27,7 +27,7 @@ class owner(commands.Cog):
     def __init__(self, bot: commands.bot) -> None:
         self.bot = bot
     
-    @commands.command(name="restart", aliases="reboot")
+    @commands.command(name="restart", aliases=["reboot"])
     @commands.is_owner()
     async def rebootbot(self, ctx):
         os.execv(sys.executable, ["python3"] + sys.argv)
