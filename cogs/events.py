@@ -287,6 +287,9 @@ class events(commands.Cog):
         
         if ctx.guild.id != 918787074801401868:
             listies.append("damn")
+            
+        if ctx.guild.id == 918787074801401868 and "😳" in ctx.content:
+            await ctx.add_reaction("<:skushed:983643982884139018>")
         
         for x in range(0, len(listies)):
             if ctx.content.lower() == listies[x]:
