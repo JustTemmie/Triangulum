@@ -247,6 +247,12 @@ class events(commands.Cog):
         if "amog" in ctx.content.lower() or "amongu" in ctx.content.lower() or "among us" in ctx.content.lower():
             msg = await ctx.reply("sus")
         
+        if "imposter" in ctx.content.lower():
+            msg = await ctx.reply("that's not very chungus crewmate of you")
+        
+        if "crewmate" in ctx.content.lower():
+            msg = await ctx.reply("sure thing there you sussy wussy lil amongling")
+        
         if "bee " in ctx.content.lower() or "bee" == ctx.content.lower():   
             await ctx.add_reaction("<a:B_:976827254799740938>")
             
