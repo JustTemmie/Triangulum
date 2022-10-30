@@ -90,7 +90,7 @@ bot = MyBot()
 tree = bot.tree
 
 # Remove default help command
-bot.remove_command("help")
+# bot.remove_command("help")
 # Set the ready status to False, so the bot knows it hasnt been initialized yet.
 bot.ready = False
 
