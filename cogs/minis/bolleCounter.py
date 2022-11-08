@@ -10,8 +10,7 @@ class ecobuild(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="bolle", brief="count how many bolle's you've eaten")
-    @commands.guild_only()
+    @commands.hybrid_command(name="bolle", brief="count how many bolle's you've eaten")
     async def bolleCoutercommand(self, ctx, bolles = 0):
         await dataStuff.open_account(self, ctx)
 
