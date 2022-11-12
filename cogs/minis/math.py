@@ -29,7 +29,7 @@ class mathCommands(commands.Cog):
         try:
             with timeout(5, exception=RuntimeError):
                 if set(mathEquation).difference(set(allowedCharacters)):
-                    return await interaction.response.send_messaged(f"invalid characters used, please only use the following symbols: `{allowedCharacters}`")
+                    return await interaction.response.send_message(f"invalid characters used, please only use the following symbols: `{allowedCharacters}`")
                 
                 await interaction.response.send_message(f"{equation} = {eval(mathEquation)}")
         except Exception as e:
