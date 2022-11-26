@@ -132,6 +132,7 @@ henwees = [
 class events(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.beaver_break.start()
         self.fish_friday.start()
         self.henwee.start()
         self.random_reddit.start()
