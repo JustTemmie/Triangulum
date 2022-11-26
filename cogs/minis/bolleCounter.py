@@ -6,7 +6,7 @@ import json
 
 import libraries.dataStuff as dataStuff
 
-class ecobuild(commands.Cog):
+class bolle(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -46,4 +46,4 @@ class ecobuild(commands.Cog):
         
         
 async def setup(bot):
-    await bot.add_cog(ecobuild(bot))
+    await bot.add_cog(bolle(bot))
