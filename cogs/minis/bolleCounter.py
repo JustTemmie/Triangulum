@@ -11,7 +11,7 @@ class ecobuild(commands.Cog):
         self.bot = bot
 
     @commands.hybrid_command(name="bolle", brief="count how many bolle's you've eaten")
-    async def bolleCoutercommand(self, ctx, bolles = 0):
+    async def bolleCoutercommand(self, ctx, bolles = 0.0):
         await dataStuff.open_account(self, ctx)
 
         userNotExist = await dataStuff.check_if_not_exist(ctx.author)
