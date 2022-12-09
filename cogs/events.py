@@ -132,6 +132,7 @@ henwees = [
 class events(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.beaver_break.start()
         self.fish_friday.start()
         self.henwee.start()
         self.random_reddit.start()
@@ -210,7 +211,10 @@ class events(commands.Cog):
 
             except Forbidden:
                 pass
-
+		
+		elif member.guild.id == 1046773323163508797: #dnd server
+			await member.add_roles(1046875890086318151)
+		
         elif member.guild.id == 918787074801401868:  # frog
             await self.bot.get_channel(918787075434762242).send(
                 f"YOOOOO {member.mention} JUST JOINED THE FROG AGENDAAAA!!!!"

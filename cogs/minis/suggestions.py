@@ -10,6 +10,7 @@ class suggestions(commands.Cog):
         try:
             if message.channel.id == (919609742542897242):
                 await message.add_reaction("👍")
+                await message.add_reaction("🫳")
                 await message.add_reaction("👎")
 
         except:
