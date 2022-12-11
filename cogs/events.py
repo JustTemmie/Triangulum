@@ -191,7 +191,7 @@ class events(commands.Cog):
         if member.bot:
             return
         
-        guilds = [694107776015663146, 918787074801401868, 946136828916944987, 885113462378876948]
+        guilds = [694107776015663146, 918787074801401868, 946136828916944987, 885113462378876948, 1046773323163508797]
         
         if not member.guild.id in guilds:
             return
@@ -211,10 +211,10 @@ class events(commands.Cog):
 
             except Forbidden:
                 pass
-		
-		elif member.guild.id == 1046773323163508797: #dnd server
-			await member.add_roles(1046875890086318151)
-		
+
+        elif member.guild.id == 1046773323163508797: #dnd server
+            await member.add_roles(1046875890086318151)
+	
         elif member.guild.id == 918787074801401868:  # frog
             await self.bot.get_channel(918787075434762242).send(
                 f"YOOOOO {member.mention} JUST JOINED THE FROG AGENDAAAA!!!!"
