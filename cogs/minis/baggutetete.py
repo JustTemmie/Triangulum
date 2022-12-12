@@ -10,7 +10,7 @@ class bagbag(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.hybrid_command(name="ostbag", brief="count how many bolle's you've eaten")
+    @commands.hybrid_command(name="ostbag", brief="count how many bagbag's you've eaten")
     async def ostbagcommand(self, ctx, bags = 0.0):
         await dataStuff.open_account(self, ctx)
 
@@ -37,7 +37,7 @@ class bagbag(commands.Cog):
             json.dump(bank, f)
         
         embed = Embed()
-        embed.title = f"{ctx.author.display_name} just ate {bags} bolles"
+        embed.title = f"{ctx.author.display_name} just ate {bags} bags"
         embed.colour = ctx.author.colour
 
         embed.add_field(name = "now they've eaten", value = f'{bank[str(ctx.author.id)]["stats"]["bag_eaten"]} bagbags')
