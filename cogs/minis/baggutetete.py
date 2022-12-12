@@ -10,7 +10,7 @@ class bagbag(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.hybrid_command(name="ostbag", brief="count how many bagbag's you've eaten")
+    @commands.hybrid_command(name="ostbag", aliases=["ostebaguette", "ostbaguette"], brief="count how many bagbag's you've eaten")
     async def ostbagcommand(self, ctx, bags = 0.0):
         await dataStuff.open_account(self, ctx)
 
@@ -31,7 +31,7 @@ class bagbag(commands.Cog):
             return
         
 
-        bank[str(ctx.author.id)]["stats"]["bolle_eaten"] += bags
+        bank[str(ctx.author.id)]["stats"]["bag_eaten"] += bags
 
         with open("./storage/playerData.json", "w") as f:
             json.dump(bank, f)
