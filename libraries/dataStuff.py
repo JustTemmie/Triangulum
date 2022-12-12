@@ -3,7 +3,7 @@ import asyncio
 from discord import Embed
 
 
-inv_version = 1.0
+inv_version = 1.01
 
 
 async def check_if_not_exist(user):
@@ -19,6 +19,8 @@ async def update_accounts():
     users = await get_bank_data()
 
     for user in users:
+        if users[str(user)]["version"] <= 1.01:
+            users[str(user)]["stats"]["bag_eaten"] = 0
 
         pass
 
@@ -56,6 +58,7 @@ async def open_account(self, ctx):
     users[str(user.id)]["stats"] = {}
     
     users[str(user.id)]["stats"]["bolle_eaten"] = 0
+    users[str(user.id)]["stats"]["bag_eaten"] = 0
     
     
     users[str(user.id)]["version"] = inv_version
