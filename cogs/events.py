@@ -21,7 +21,7 @@ from math import floor
 
 IGNORE_EXCEPTIONS = (CommandNotFound, BadArgument)
 
-fish_IDs = [1008131433669341274, 885113515411669002]
+fish_IDs = [1008131433669341274, 885113515411669002, 993869689220509730]
 
 henwees = [
     "henwee :)",
@@ -191,7 +191,7 @@ class events(commands.Cog):
         if member.bot:
             return
         
-        guilds = [694107776015663146, 918787074801401868, 946136828916944987, 885113462378876948]
+        guilds = [694107776015663146, 918787074801401868, 946136828916944987, 885113462378876948, 1046773323163508797]
         
         if not member.guild.id in guilds:
             return
@@ -211,10 +211,10 @@ class events(commands.Cog):
 
             except Forbidden:
                 pass
-		
-		elif member.guild.id == 1046773323163508797: #dnd server
-			await member.add_roles(1046875890086318151)
-		
+
+        elif member.guild.id == 1046773323163508797: #dnd server
+            await member.add_roles(1046875890086318151)
+	
         elif member.guild.id == 918787074801401868:  # frog
             await self.bot.get_channel(918787075434762242).send(
                 f"YOOOOO {member.mention} JUST JOINED THE FROG AGENDAAAA!!!!"
@@ -338,6 +338,7 @@ class events(commands.Cog):
 
         # sends frog in #daily frogs
         await self.send_reddit(1008131433669341274, "frogs", True, 25)
+        await self.send_reddit(993869689220509730, "frogs", True, 25)
 
         with open("images/video/date.json", "w") as f:
             json.dump(f"{datetime.now().day}", f)
