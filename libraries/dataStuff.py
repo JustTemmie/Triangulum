@@ -35,7 +35,7 @@ async def open_account(self, ctx):
     embed = Embed(title="Do you want to open an account?", color=ctx.author.color)
 
     embed.add_field(
-        name='If you do, please respond with "yes"\nDoing this means you agree to storing data on Triangulums\'s server',
+        name='If you do, please respond with "yes"\nDoing this means you agree to storing data on Triangulum\'s server',
         value="||\n||",
         inline=False,
     )
