@@ -232,11 +232,6 @@ class events(commands.Cog):
     
     @commands.Cog.listener()
     async def on_message(self, ctx):
-        # if ctx.content == "qscav":
-        #     if ctx.author.id == 725539745572323409:
-        #         time.sleep(302)
-        #         await ctx.author.send("do qscav")
-
         if "--" in ctx.content:
             return
 
@@ -258,7 +253,7 @@ class events(commands.Cog):
             msg = await ctx.reply("sure thing there you sussy wussy lil amongling")
         
         if "bee " in ctx.content.lower() or "bee" == ctx.content.lower():   
-            await ctx.add_reaction("<a:B_:976827254799740938>")
+            await ctx.add_reaction("🐝")
             
         
         if random.randint(0, 75000) == 2:
@@ -431,7 +426,7 @@ class events(commands.Cog):
                 print(f"error in send_reddit: {e}")
     
     async def react_beaver(self, ctx):
-        await ctx.add_reaction("<a:beav:973130744190869575>")
+        await ctx.add_reaction("<a:Beaver:984112915206520842>")
         if random.randrange(0, 40) == 2 and "beaver" in ctx.content:
             message = [
                 "DID SOMEONE JUST SAY BEAVER?",
