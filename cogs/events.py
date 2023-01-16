@@ -333,7 +333,7 @@ class events(commands.Cog):
 
         # sends frog in #daily frogs
         await self.send_reddit(1008131433669341274, "frogs", True, 25)
-        await self.send_reddit(993869689220509730, "frogs", True, 25)
+        # await self.send_reddit(993869689220509730, "frogs", True, 25)
 
         with open("images/video/date.json", "w") as f:
             json.dump(f"{datetime.now().day}", f)
