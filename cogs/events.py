@@ -1,4 +1,4 @@
-import discord
+0 discord
 from discord.ext import commands, tasks
 from discord.errors import Forbidden
 from discord.ext.commands import (
@@ -365,7 +365,7 @@ class events(commands.Cog):
     
     @tasks.loop(seconds=293)
     async def henwee(self):
-        if random.randrange(1, 3000) == 2:
+        if random.randrange(1, 40000) == 2:
             await self.bot.get_channel(919666600955760702).send(
                 "reminder to keep on henweeing :)",
                 file=discord.File("images/processed/henwee_fall.gif"),
