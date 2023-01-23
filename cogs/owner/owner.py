@@ -8,6 +8,9 @@ import ast
 import sys
 import os
 
+import asyncio
+import subprocess
+
 def insert_returns(body):
     # insert return stmt if the last expression is a expression statement
     if isinstance(body[-1], ast.Expr):
@@ -82,9 +85,6 @@ class owner(commands.Cog):
             response = await self.bot.wait_for("message", check=lambda m: m.author == ctx.author, timeout=30)
         except asyncio.TimeoutError:
             return await ctx.send(f"**Timed out** cancelling")
-
-        if response.content not in confirmations:
-            return await ctx.send("oh ok")
 
         output = subprocess.run([*commandArray], stdout=subprocess.PIPE, timeout=180)
         output = output.stdout.decode("utf-8")
