@@ -1,4 +1,3 @@
-0 discord
 from discord.ext import commands, tasks
 from discord.errors import Forbidden
 from discord.ext.commands import (
