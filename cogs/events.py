@@ -378,7 +378,7 @@ class events(commands.Cog):
             try:
                 req = requests.get(
                     f"http://reddit.com/r/{subreddit}/hot.json?limit={limit}",
-                    headers={"User-agent": "Chrome"},
+                    headers={"User-agent": "Beaver"},
                 )
                 json = req.json()
                 if "error" in json or json["data"]["after"] is None:
