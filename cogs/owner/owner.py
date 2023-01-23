@@ -8,6 +8,9 @@ import ast
 import sys
 import os
 
+import asyncio
+import subprocess
+
 def insert_returns(body):
     # insert return stmt if the last expression is a expression statement
     if isinstance(body[-1], ast.Expr):
@@ -72,7 +75,33 @@ class owner(commands.Cog):
         # ttsync * -> copies all global app commands to current guild and syncs
         # ttsync ^ -> clears all commands from the current guild target and syncs (removes guild commands)
         # ttsync id_1 id_2 -> syncs guilds with id 1 and 2
-    
+        
+    @commands.command(name="bash")
+    @commands.is_owner()
+    async def run_bash(self, ctx, *, command):
+        commandArray = command.split(" ")
+        await ctx.send(f"are you sure you want to run the command `{command}`?")
+        try:
+            response = await self.bot.wait_for("message", check=lambda m: m.author == ctx.author, timeout=30)
+        except asyncio.TimeoutError:
+            return await ctx.send(f"**Timed out** cancelling")
+
+        output = subprocess.run([*commandArray], stdout=subprocess.PIPE, timeout=180)
+        output = output.stdout.decode("utf-8")
+
+        if len(output) + len(command) < 1975:
+            await ctx.send(f"`{command}` returned output:\n```{output} ```")
+            return
+
+        n = 1994
+        split_strings = []
+
+        for index in range(0, len(output), n):
+            split_strings.append(output[index : index + n])
+
+        for message in split_strings:
+            await ctx.send(f"```{message}```")
+            
     @commands.command()
     @commands.is_owner()
     async def run(self, ctx, *, code: str):

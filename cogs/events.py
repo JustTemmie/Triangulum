@@ -257,7 +257,7 @@ class events(commands.Cog):
             
         
         if random.randint(0, 75000) == 2:
-            await self.react_beaver(ctx)
+            await ctx.add_reaction("<a:Beaver:984112915206520842>")
         
         
         if ctx.author.id == 325325337615532054:  # adino
@@ -333,24 +333,21 @@ class events(commands.Cog):
 
         # sends frog in #daily frogs
         await self.send_reddit(1008131433669341274, "frogs", True, 25)
-        await self.send_reddit(993869689220509730, "frogs", True, 25)
+        # await self.send_reddit(993869689220509730, "frogs", True, 25)
 
         with open("images/video/date.json", "w") as f:
             json.dump(f"{datetime.now().day}", f)
 
         if datetime.today().weekday() != 4:
             return
-        
-        x = 0
-        
+
         if random.randrange(0, 10) == 2:
-             x = 1
- 
-        for ID in fish_IDs:
-            if x == 0:
-                await self.bot.get_channel(ID).send("frog friday!!!", file=discord.File("images/video/funnies/funnyfrogfriday.mp4"))
-            if x == 1:
+            for ID in fish_IDs:
                 await self.bot.get_channel(ID).send("fr- waiit what?", file=discord.File("images/video/funnies/fish.mp4"))
+        
+        for ID in fish_IDs:
+            await self.bot.get_channel(ID).send("frog friday!!!", file=discord.File("images/video/funnies/funnyfrogfriday.mp4"))
+        
 
     @tasks.loop(hours=1)
     async def beaver_break(self):
@@ -365,7 +362,7 @@ class events(commands.Cog):
     
     @tasks.loop(seconds=293)
     async def henwee(self):
-        if random.randrange(1, 3000) == 2:
+        if random.randrange(1, 40000) == 2:
             await self.bot.get_channel(919666600955760702).send(
                 "reminder to keep on henweeing :)",
                 file=discord.File("images/processed/henwee_fall.gif"),
@@ -373,7 +370,7 @@ class events(commands.Cog):
     
     @tasks.loop(minutes=30)
     async def random_reddit(self):
-        await self.send_reddit(974642338150367252, "all", False, 100)
+        await self.send_reddit(974642338150367252, "all", True, 100)
         
     
     async def send_reddit(self, channel, subreddit, imageRequired=False, limit=25):
