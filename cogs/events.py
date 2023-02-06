@@ -354,7 +354,7 @@ class events(commands.Cog):
         if not self.bot.ready:
             return
         
-        if random.randint(0, 2000) != 2:
+        if random.randint(0, 5000) != 2:
             return
     
         for ID in fish_IDs:
