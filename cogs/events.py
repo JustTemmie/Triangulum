@@ -133,6 +133,7 @@ class events(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.beaver_break.start()
+        self.bloons_challenge.start()
         self.fish_friday.start()
         self.henwee.start()
         self.random_reddit.start()
@@ -320,10 +321,38 @@ class events(commands.Cog):
                         file=discord.File("images/processed/henwee_fall.gif"),
                     )
 
+    @tasks.loop(seconds=5)
+    async def bloons_challenge(self):
+        if not self.bot.ready:
+            return
+        
+        with open("storage/bloonsDaily.txt", "r") as f:
+            data = f.read()
+
+        if data == str(datetime.now().day) or datetime.now().hour < 8:
+            return
+
+        with open("storage/bloonsDaily.txt", "w") as f:
+            f.write(str(datetime.now().day))
+            
+        bloonsDailies = [
+            "bloons dailies :pleading_face:",
+            "wasss poppin nnnnnn",
+            "pssttt.. did you know that bloons has dailies?",
+            "bloon go pop",
+            "wake up babe bloon's calling",
+            "new day, new war crimes",
+            "oh god time to play war criminal game again, just don't get mid path ace",
+            "god why is churchil so fucking mid",
+            "poopers :flushed:",     
+        ]
+
+        await self.bot.get_channel(1085938987803357314).send(random.choice(bloonsDailies))
+        
     @tasks.loop(seconds=10)
     async def fish_friday(self):
         if not self.bot.ready:
-            return  
+            return
         
         with open("images/video/date.json", "r") as f:
             jsoninfo = json.load(f)
