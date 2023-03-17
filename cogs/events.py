@@ -370,12 +370,18 @@ class events(commands.Cog):
         if datetime.today().weekday() != 4:
             return
 
-        if random.randrange(0, 10) == 2:
+        number = random.randrange(0, 100)
+        if number < 87:
+            for ID in fish_IDs:
+                await self.bot.get_channel(ID).send("frog friday!!!", file=discord.File("images/video/funnies/funnyfrogfriday.mp4"))
+        
+        elif number < 92:
             for ID in fish_IDs:
                 await self.bot.get_channel(ID).send("fr- waiit what?", file=discord.File("images/video/funnies/fish.mp4"))
         
-        for ID in fish_IDs:
-            await self.bot.get_channel(ID).send("frog friday!!!", file=discord.File("images/video/funnies/funnyfrogfriday.mp4"))
+        else:
+            for ID in fish_IDs:
+                await self.bot.get_channel(ID).send("can you guess what day it is?", file=discord.File("images/video/funnies/flatworm.mp4"))
         
 
     @tasks.loop(hours=1)
