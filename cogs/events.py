@@ -344,7 +344,14 @@ class events(commands.Cog):
             "new day, new war crimes",
             "oh god time to play war criminal game again, just don't get mid path ace",
             "god why is churchil so fucking mid",
-            "poopers :flushed:",     
+            "poopers :flushed:",
+	    "poppers :pensive:",
+	    "can't talk, am blooning",
+	    "if you need me you know where to find me",
+	    "remember to do contested territories whenever it's around :pleading_face:",
+	    f"my therapist thinks i should take a break from bloons, but i think {random.choice(['they\'re', 'she\'s', 'he\'s'])} wrong",
+	    "no life, only apes vs helium\n(<https://drive.google.com/file/d/1At38dv-SQVQ3a8FN4AC79Gyhop26DPaB/view>)",
+	    "they always say practice makes perfect, but for me it just seems like it ends with more bloons",
         ]
 
         await self.bot.get_channel(1085938987803357314).send(random.choice(bloonsDailies))
