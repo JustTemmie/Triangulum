@@ -133,6 +133,7 @@ class events(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.beaver_break.start()
+        self.bloons_challenge.start()
         self.fish_friday.start()
         self.henwee.start()
         self.random_reddit.start()
@@ -257,7 +258,7 @@ class events(commands.Cog):
             
         
         if random.randint(0, 75000) == 2:
-            await self.react_beaver(ctx)
+            await ctx.add_reaction("<a:Beaver:984112915206520842>")
         
         
         if ctx.author.id == 325325337615532054:  # adino
@@ -320,10 +321,45 @@ class events(commands.Cog):
                         file=discord.File("images/processed/henwee_fall.gif"),
                     )
 
+    @tasks.loop(seconds=5)
+    async def bloons_challenge(self):
+        if not self.bot.ready:
+            return
+        
+        with open("storage/bloonsDaily.txt", "r") as f:
+            data = f.read()
+
+        if data == str(datetime.now().day) or datetime.now().hour < 8:
+            return
+
+        with open("storage/bloonsDaily.txt", "w") as f:
+            f.write(str(datetime.now().day))
+            
+        bloonsDailies = [
+            "bloons dailies :pleading_face:",
+            "wasss poppin nnnnnn",
+            "pssttt.. did you know that bloons has dailies?",
+            "bloon go pop",
+            "wake up babe bloon's calling",
+            "new day, new war crimes",
+            "oh god time to play war criminal game again, just don't get mid path ace",
+            "god why is churchil so fucking mid",
+            "poopers :flushed:",
+	    "poppers :pensive:",
+	    "can't talk, am blooning",
+	    "if you need me you know where to find me",
+	    "remember to do contested territories whenever it's around :pleading_face:",
+	    f"my therapist thinks i should take a break from bloons, but i think {random.choice(['they\'re', 'she\'s', 'he\'s'])} wrong",
+	    "no life, only apes vs helium\n(<https://drive.google.com/file/d/1At38dv-SQVQ3a8FN4AC79Gyhop26DPaB/view>)",
+	    "they always say practice makes perfect, but for me it just seems like it ends with more bloons",
+        ]
+
+        await self.bot.get_channel(1085938987803357314).send(random.choice(bloonsDailies))
+        
     @tasks.loop(seconds=10)
     async def fish_friday(self):
         if not self.bot.ready:
-            return  
+            return
         
         with open("images/video/date.json", "r") as f:
             jsoninfo = json.load(f)
@@ -340,24 +376,27 @@ class events(commands.Cog):
 
         if datetime.today().weekday() != 4:
             return
-        
-        x = 0
-        
-        if random.randrange(0, 10) == 2:
-             x = 1
- 
-        for ID in fish_IDs:
-            if x == 0:
+
+        number = random.randrange(0, 100)
+        if number < 87:
+            for ID in fish_IDs:
                 await self.bot.get_channel(ID).send("frog friday!!!", file=discord.File("images/video/funnies/funnyfrogfriday.mp4"))
-            if x == 1:
+        
+        elif number < 92:
+            for ID in fish_IDs:
                 await self.bot.get_channel(ID).send("fr- waiit what?", file=discord.File("images/video/funnies/fish.mp4"))
+        
+        else:
+            for ID in fish_IDs:
+                await self.bot.get_channel(ID).send("can you guess what day it is?", file=discord.File("images/video/funnies/flatworm.mp4"))
+        
 
     @tasks.loop(hours=1)
     async def beaver_break(self):
         if not self.bot.ready:
             return
         
-        if random.randint(0, 2000) != 2:
+        if random.randint(0, 5000) != 2:
             return
     
         for ID in fish_IDs:
@@ -365,7 +404,7 @@ class events(commands.Cog):
     
     @tasks.loop(seconds=293)
     async def henwee(self):
-        if random.randrange(1, 3000) == 2:
+        if random.randrange(1, 40000) == 2:
             await self.bot.get_channel(919666600955760702).send(
                 "reminder to keep on henweeing :)",
                 file=discord.File("images/processed/henwee_fall.gif"),
@@ -373,7 +412,7 @@ class events(commands.Cog):
     
     @tasks.loop(minutes=30)
     async def random_reddit(self):
-        await self.send_reddit(974642338150367252, "all", False, 100)
+        await self.send_reddit(974642338150367252, "all", True, 100)
         
     
     async def send_reddit(self, channel, subreddit, imageRequired=False, limit=25):
@@ -381,7 +420,7 @@ class events(commands.Cog):
             try:
                 req = requests.get(
                     f"http://reddit.com/r/{subreddit}/hot.json?limit={limit}",
-                    headers={"User-agent": "Chrome"},
+                    headers={"User-agent": "Beaver"},
                 )
                 json = req.json()
                 if "error" in json or json["data"]["after"] is None:
