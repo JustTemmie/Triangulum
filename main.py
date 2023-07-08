@@ -120,9 +120,9 @@ async def change_status_task():
 async def check_players_server():
     global serverUptimeStart
     
-    channelID = 708570731147165728
-    guildID = 628212961218920477
-    botID = 725539745572323409
+    channelID = 1091454433046573157
+    guildID = 885113462378876948
+    botID = 1125972952719044649
     channel = await bot.fetch_channel(channelID)
     guild = bot.get_guild(guildID)
     mcChatBot = guild.get_member(botID)
