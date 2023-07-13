@@ -49,7 +49,7 @@ class MyBot(commands.Bot):
     def __init__(self):
         super().__init__(
             command_prefix=commands.when_mentioned_or(DEFAULT_PREFIX),
-            intents=discord.Intents.all(),
+            intents=discord.Intents().all(),
             owner_ids=OWNER_IDS,
             #application_id=APP_ID
         )
@@ -71,9 +71,11 @@ class MyBot(commands.Bot):
         await self.wait_until_ready()
         print("Slash commands are now ready!")
         
-        await self.sync_tree()
+        # await self.sync_tree()
+        print("Successfully synced tree")
         if not self.ready:
             change_status_task.start()
+            check_players_server.start()
 
             guild_count = 0
             for guild in self.guilds:
@@ -89,6 +91,17 @@ class MyBot(commands.Bot):
 bot = MyBot()
 tree = bot.tree
 
+# mc server sutff
+onlinePlayers = -1
+serverUptimeStart = 0
+with open ("storage/mcServerData.json", "r") as f:
+    data = json.load(f)
+
+if "serverUptimeStart" in data:
+    serverUptimeStart = data["serverUptimeStart"]
+
+
+
 # Remove default help command
 # bot.remove_command("help")
 # Set the ready status to False, so the bot knows it hasnt been initialized yet.
@@ -102,6 +115,56 @@ async def change_status_task():
             status=discord.Status.idle,
             activity=discord.Activity(type=discord.ActivityType.watching, name=bot.timestring),
         )
+
+@tasks.loop(seconds=3)
+async def check_players_server():
+    global serverUptimeStart
+    
+    channelID = 1091454433046573157
+    guildID = 885113462378876948
+    botID = 1125972952719044649
+    channel = await bot.fetch_channel(channelID)
+    guild = bot.get_guild(guildID)
+    mcChatBot = guild.get_member(botID)
+    
+    if mcChatBot.status == "offline":
+        await channel.edit(topic="Server is offline.")
+        
+        with open ("storage/mcServerData.json", "r") as f:
+            data = json.load(f)
+        serverUptimeStart = 0
+        data["serverUptimeStart"] = serverUptimeStart
+        with open ("storage/mcServerData.json", "w") as f:
+            json.dump(data, f)
+        
+    
+    if "Players" not in mcChatBot.activity.name:
+        return
+        
+    if mcChatBot.activity.name.split(" Players")[0] == onlinePlayers:
+        return
+    
+    onlinePlayers = mcChatBot.activity.name.split(" Players")[0]
+    
+    if type(onlinePlayers) != int:
+        return
+
+    if serverUptimeStart == 0:
+        with open ("storage/mcServerData.json", "r") as f:
+            data = json.load(f)
+        serverUptimeStart = time()
+        data["serverUptimeStart"] = serverUptimeStart
+        with open ("storage/mcServerData.json", "w") as f:
+            json.dump(data, f)
+
+    optionalS = ""
+    if onlinePlayers != 1: optionalS = "s" 
+    
+    await channel.edit(
+        topic=f"{onlinePlayers} player{optionalS} online | online for <R:{round(serverUptimeStart)}>"
+    )
+
+
 
 async def load_cogs(bot):
     print("Loading cogs...")
