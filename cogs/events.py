@@ -349,7 +349,9 @@ class events(commands.Cog):
 	    "can't talk, am blooning",
 	    "if you need me you know where to find me",
 	    "remember to do contested territories whenever it's around :pleading_face:",
-	    f"my therapist thinks i should take a break from bloons, but i think {random.choice(['they\'re', 'she\'s', 'he\'s'])} wrong",
+	    "my therapist thinks i should take a break from bloons, but i think she's wrong",
+	    "my therapist thinks i should take a break from bloons, but i think they's wrong",
+	    "my therapist thinks i should take a break from bloons, but i think he's wrong",
 	    "no life, only apes vs helium\n(<https://drive.google.com/file/d/1At38dv-SQVQ3a8FN4AC79Gyhop26DPaB/view>)",
 	    "they always say practice makes perfect, but for me it just seems like it ends with more bloons",
         ]
