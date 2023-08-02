@@ -105,7 +105,7 @@ class owner(commands.Cog):
     @commands.command(name="startandro")
     @commands.is_owner()
     async def run_andro(self, ctx):
-        output = subprocess.run("screen -dmS andromeda bash -c 'cd Scripts/space-bot/; python3.10 main.py'", shell=True, check=True, timeout=180)
+        output = subprocess.run("screen -dmS andromeda bash -c 'cd Scripts/space-bot/; python3.10 main.py'", stdout=subprocess.PIPE, timeout=180)
         await ctx.send("oke!")
         await ctx.send(output)
     
