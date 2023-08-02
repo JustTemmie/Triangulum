@@ -101,7 +101,13 @@ class owner(commands.Cog):
 
         for message in split_strings:
             await ctx.send(f"```{message}```")
-            
+
+    @commands.command(name="startandro")
+    @commands.is_owner()
+    async def run_andro(self, ctx):
+        subprocess.run("screen -dmS andromeda bash -c 'cd Scripts/space-bot/; python3.10 main.py'", shell=True, check=True, timeout=180)
+        await ctx.send("oke!")
+    
     @commands.command()
     @commands.is_owner()
     async def run(self, ctx, *, code: str):
